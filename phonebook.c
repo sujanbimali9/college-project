@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include <conio.h>
+// #include <conio.h>
 #include <stdlib.h>
 #include <ctype.h>
 
@@ -21,18 +21,22 @@ int compare(const void *a, const void *b);
 int c = 0;
 
 void main()
-{   system("cls");
+{
+    // system("cls");
+    system("clear");
     printf("\t\t\t\t _____\t _____\t _    .\t_______\t   _  \t _____\t_______\t \n");
-    printf("\t\t\t\t|     \t|     |\t| \\   |\t   |  \t  / \\  \t|     \t   |  \t\n");  
+    printf("\t\t\t\t|     \t|     |\t| \\   |\t   |  \t  / \\  \t|     \t   |  \t\n");
     printf("\t\t\t\t|     \t|     |\t|  \\  |\t   |  \t /___\\ \t|     \t   |  \t \n");
     printf("\t\t\t\t|_____\t|_____|\t|   \\_|    |   \t/     \\\t|_____\t   |   \t \n");
-    getch();
+    // getch();
     int choice;
 
     while (1)
-    {   system("cls");
+    {
+        // system("cls");
+        system("clear");
         printf("\t\t\t\t _____\t _____\t _    .\t_______\t   _  \t _____\t_______\t \n");
-        printf("\t\t\t\t|     \t|     |\t| \\   |\t   |  \t  / \\  \t|     \t   |  \t\n");  
+        printf("\t\t\t\t|     \t|     |\t| \\   |\t   |  \t  / \\  \t|     \t   |  \t\n");
         printf("\t\t\t\t|     \t|     |\t|  \\  |\t   |  \t /___\\ \t|     \t   |  \t \n");
         printf("\t\t\t\t|_____\t|_____|\t|   \\_|    |   \t/     \\\t|_____\t   |   \t \n");
         // printf("\n\n\t\t\t\t\t============ CONTACTS ============\n");
@@ -77,7 +81,8 @@ void main()
 
 void add_contact()
 {
-    system("cls");
+    // system("cls");
+    system("clear");
     char another;
     FILE *fp;
     int n, i;
@@ -126,7 +131,8 @@ int compare(const void *a, const void *b)
 
 void display_contacts()
 {
-    system("cls");
+    // system("cls");
+    system("clear");
     FILE *fp;
     struct contacts contactArray[100];
     struct contacts info;
@@ -147,18 +153,19 @@ void display_contacts()
     fclose(fp);
     qsort(contactArray, c, sizeof(struct contacts), compare);
 
-     printf("\n\n\t\t\t\t\t============ CONTACTS ============\n\n");
+    printf("\n\n\t\t\t\t\t============ CONTACTS ============\n\n");
     for (int i = 0; i < c; i++)
     {
         printf("\n\t\t\t\t\t\t %d) Name  : %s %s\n", i + 1, contactArray[i].first_name, contactArray[i].last_name);
         printf("\t\t\t\t\t\t   Phone no : %ld\n", contactArray[i].phoneno);
         printf("\t\t\t\t\t\t-------------------------\n");
     }
-    getch();
+    // getch();
 }
 void search_contact()
 {
-    system("cls");
+    // system("cls");
+    system("clear");
     FILE *fp;
     struct contacts info;
     char name[30];
@@ -202,11 +209,11 @@ void search_contact()
         printf("\n\t\t\tNo contacts founds by that name\n");
     }
     fclose(fp);
-    getch();
+    // getch();
 }
 void update_contact()
 {
-     FILE *fp,*fp1;
+    FILE *fp, *fp1;
     struct contacts info;
     char name[30];
     int found = 0;
@@ -249,29 +256,28 @@ void update_contact()
     }
     fclose(fp);
     fclose(fp1);
-    if(found)
+    if (found)
     {
-            fp1 = fopen("tempContacts.txt", "r");
-            fp = fopen("contacts.txt", "w");
+        fp1 = fopen("tempContacts.txt", "r");
+        fp = fopen("contacts.txt", "w");
 
-            while(fread(&info,sizeof(struct contacts),1,fp1))
-            {
-                fwrite(&info,sizeof(struct contacts),1,fp);
-            }
+        while (fread(&info, sizeof(struct contacts), 1, fp1))
+        {
+            fwrite(&info, sizeof(struct contacts), 1, fp);
+        }
 
-            fclose(fp);
-            fclose(fp1);
-    }   
+        fclose(fp);
+        fclose(fp1);
+    }
     else
     {
         printf("\n\t\t\t\t\t\tNo contacts founds by that name\n");
     }
-   
 }
 
 void delete_contact()
 {
-     FILE *fp,*fp1;
+    FILE *fp, *fp1;
     struct contacts info;
     char name[30];
     int found = 0;
@@ -309,22 +315,21 @@ void delete_contact()
     }
     fclose(fp);
     fclose(fp1);
-    if(found)
+    if (found)
     {
-            fp1 = fopen("tempContacts.txt", "r");
-            fp = fopen("contacts.txt", "w");
+        fp1 = fopen("tempContacts.txt", "r");
+        fp = fopen("contacts.txt", "w");
 
-            while(fread(&info,sizeof(struct contacts),1,fp1))
-            {
-                fwrite(&info,sizeof(struct contacts),1,fp);
-            }
+        while (fread(&info, sizeof(struct contacts), 1, fp1))
+        {
+            fwrite(&info, sizeof(struct contacts), 1, fp);
+        }
 
-            fclose(fp);
-            fclose(fp1);
-    }   
+        fclose(fp);
+        fclose(fp1);
+    }
     else
     {
         printf("\n\t\t\t\t\t\t\tNo contacts founds by that name\n");
     }
-   
 }
