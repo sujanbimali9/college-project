@@ -23,18 +23,19 @@ int c = 0;
 void main()
 {
     // system("cls");
-    system("clear");
+    // system("clear");
     printf("\t\t\t\t _____\t _____\t _    .\t_______\t   _  \t _____\t_______\t \n");
     printf("\t\t\t\t|     \t|     |\t| \\   |\t   |  \t  / \\  \t|     \t   |  \t\n");
     printf("\t\t\t\t|     \t|     |\t|  \\  |\t   |  \t /___\\ \t|     \t   |  \t \n");
     printf("\t\t\t\t|_____\t|_____|\t|   \\_|    |   \t/     \\\t|_____\t   |   \t \n");
     // getch();
+    // getchar();
     int choice;
 
     while (1)
     {
         // system("cls");
-        system("clear");
+        // system("clear");
         printf("\t\t\t\t _____\t _____\t _    .\t_______\t   _  \t _____\t_______\t \n");
         printf("\t\t\t\t|     \t|     |\t| \\   |\t   |  \t  / \\  \t|     \t   |  \t\n");
         printf("\t\t\t\t|     \t|     |\t|  \\  |\t   |  \t /___\\ \t|     \t   |  \t \n");
@@ -82,7 +83,7 @@ void main()
 void add_contact()
 {
     // system("cls");
-    system("clear");
+    // system("clear");
     char another;
     FILE *fp;
     int n, i;
@@ -161,11 +162,12 @@ void display_contacts()
         printf("\t\t\t\t\t\t-------------------------\n");
     }
     // getch();
+    getchar();
 }
 void search_contact()
 {
     // system("cls");
-    system("clear");
+    // system("clear");
     FILE *fp;
     struct contacts info;
     char name[30];
@@ -210,6 +212,7 @@ void search_contact()
     }
     fclose(fp);
     // getch();
+    // getchar();
 }
 void update_contact()
 {
