@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-// #include <conio.h>
 #include <stdlib.h>
 #include <ctype.h>
 
@@ -23,23 +22,27 @@ int c = 0;
 void main()
 {
     // system("cls");
-    // system("clear");
+    getchar();
+
+    system("clear");
+
     printf("\t\t\t\t _____\t _____\t _    .\t_______\t   _  \t _____\t_______\t \n");
     printf("\t\t\t\t|     \t|     |\t| \\   |\t   |  \t  / \\  \t|     \t   |  \t\n");
     printf("\t\t\t\t|     \t|     |\t|  \\  |\t   |  \t /___\\ \t|     \t   |  \t \n");
     printf("\t\t\t\t|_____\t|_____|\t|   \\_|    |   \t/     \\\t|_____\t   |   \t \n");
-    // getch();
-    // getchar();
-    int choice;
+    printf("\n\n\t\t\t\t\t\tPress Enter to continue...\n");
+    getchar();
 
+    int choice;
+    system("clear");
     while (1)
     {
-        // system("cls");
-        // system("clear");
+
         printf("\t\t\t\t _____\t _____\t _    .\t_______\t   _  \t _____\t_______\t \n");
         printf("\t\t\t\t|     \t|     |\t| \\   |\t   |  \t  / \\  \t|     \t   |  \t\n");
         printf("\t\t\t\t|     \t|     |\t|  \\  |\t   |  \t /___\\ \t|     \t   |  \t \n");
         printf("\t\t\t\t|_____\t|_____|\t|   \\_|    |   \t/     \\\t|_____\t   |   \t \n");
+
         // printf("\n\n\t\t\t\t\t============ CONTACTS ============\n");
         printf("\n\t\t\t\t\t\t  1:add contacts");
         printf("\n\t\t\t\t\t\t  2:show all contacts");
@@ -83,7 +86,7 @@ void main()
 void add_contact()
 {
     // system("cls");
-    // system("clear");
+    system("clear");
     char another;
     FILE *fp;
     int n, i;
@@ -95,7 +98,7 @@ void add_contact()
         scanf("%s", info.first_name);
         printf("\t\t\t\t\tEnter second name : ");
         scanf("%s", info.last_name);
-        printf("\t\t\t\t\tEnter the phoneno : ");
+        printf("\n\t\t\t\t\tEnter the phoneno : ");
         scanf("%ld", &info.phoneno);
 
         fp = fopen("contacts.txt", "a");
@@ -113,6 +116,7 @@ void add_contact()
         scanf("%s", &another);
 
     } while (another == 'y' || another == 'Y');
+    system("clear");
 }
 
 int compare(const void *a, const void *b)
@@ -134,6 +138,8 @@ void display_contacts()
 {
     // system("cls");
     system("clear");
+    getchar();
+
     FILE *fp;
     struct contacts contactArray[100];
     struct contacts info;
@@ -161,13 +167,17 @@ void display_contacts()
         printf("\t\t\t\t\t\t   Phone no : %ld\n", contactArray[i].phoneno);
         printf("\t\t\t\t\t\t-------------------------\n");
     }
+    printf("\n\t\t\t\t\t\tPress Enter to continue...\n");
     // getch();
     getchar();
+    system("clear");
 }
+
 void search_contact()
 {
     // system("cls");
-    // system("clear");
+    system("clear");
+    getchar();
     FILE *fp;
     struct contacts info;
     char name[30];
@@ -189,6 +199,8 @@ void search_contact()
 
     printf("\n\n\n\t\t\t\t\t\t===== Search Result =====\n\n\n");
 
+    getchar();
+
     while (fread(&info, sizeof(struct contacts), 1, fp))
     {
         char contactFirstName[30];
@@ -203,16 +215,18 @@ void search_contact()
             printf("\t\t\t\t\t\tName: %s %s\n", info.first_name, info.last_name);
             printf("\t\t\t\t\t\tPhone Number: %ld\n", info.phoneno);
             printf("\t\t\t\t\t\t____________________________\n");
+            getchar();
             found = 1;
         }
     }
     if (!found)
     {
-        printf("\n\t\t\tNo contacts founds by that name\n");
+        printf("\n\t\t\t\t\t\tNo contacts founds by that name\n");
+        getchar();
     }
     fclose(fp);
     // getch();
-    // getchar();
+    system("clear");
 }
 void update_contact()
 {
@@ -222,7 +236,7 @@ void update_contact()
     int found = 0;
 
     printf("\t\t\t\t\t\tEnter the name to update : ");
-    scanf("%s", name);
+    scanf(" %s", name);
     for (int i = 0; name[i]; i++)
     {
         name[i] = tolower(name[i]);
@@ -247,18 +261,21 @@ void update_contact()
 
         if (strcmp(contactFirstName, name) == 0)
         {
-            printf("\t\t\t\t\t\tEnter new first name  : ");
+            printf("\n\t\t\t\t\t\tEnter new first name  : ");
             scanf("%s", info.first_name);
             printf("\t\t\t\t\t\tEnter new second name  : ");
             scanf("%s", info.last_name);
             printf("\t\t\t\t\t\tEnter new phoneno : ");
             scanf("%ld", &info.phoneno);
             found = 1;
+            printf("\n\n\t\t\t\t\t\tcontact updated successfully");
+            getchar();
         }
         fwrite(&info, sizeof(struct contacts), 1, fp1);
     }
     fclose(fp);
     fclose(fp1);
+    getchar();
     if (found)
     {
         fp1 = fopen("tempContacts.txt", "r");
@@ -271,10 +288,14 @@ void update_contact()
 
         fclose(fp);
         fclose(fp1);
+        remove("tempContacts.txt");
+        system("clear");
     }
     else
     {
         printf("\n\t\t\t\t\t\tNo contacts founds by that name\n");
+        getchar();
+        system("clear");
     }
 }
 
@@ -312,12 +333,15 @@ void delete_contact()
         if (strcmp(contactFirstName, name) == 0)
         {
             found = 1;
+            printf("\n\t\t\t\t\t\tContact deleted successfully.\n");
+            getchar();
         }
         else
             fwrite(&info, sizeof(struct contacts), 1, fp1);
     }
     fclose(fp);
     fclose(fp1);
+    getchar();
     if (found)
     {
         fp1 = fopen("tempContacts.txt", "r");
@@ -330,9 +354,13 @@ void delete_contact()
 
         fclose(fp);
         fclose(fp1);
+        remove("tempContacts.txt");
+        system("clear");
     }
     else
     {
-        printf("\n\t\t\t\t\t\t\tNo contacts founds by that name\n");
+        printf("\n\t\t\t\t\t\tNo contacts founds by that name\n");
+        getchar();
+        system("clear");
     }
 }
