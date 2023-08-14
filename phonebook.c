@@ -2,6 +2,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#define green_colour "\033[1;32m"
+#define blue_colour "\033[0;34m"
+#define red_colour "\033[0;31m"
 
 struct contacts
 {
@@ -21,38 +24,52 @@ int c = 0;
 
 void main()
 {
-    // system("cls");
     getchar();
+    // getch();   // ummark for windows
 
     system("clear");
+    // system("clr");  //unmark on windows
+    printf(blue_colour);
+    printf("\t\t\t\t ______    ________    ___     _    _________    ___       ______    _________\n");
+    printf("\t\t\t\t|  ____|  |  ____  |  |   \\   | |  |___   ___|  / _ \\     |  ____|  |___   ___|\n");
+    printf("\t\t\t\t| |       | |    | |  | |\\ \\  | |      | |     / /_\\ \\    | |           | |  \n");
+    printf("\t\t\t\t| |       | |    | |  | | \\ \\ | |      | |    / ____  \\   | |           | | \n");
+    printf("\t\t\t\t| |____   | |____| |  | |  \\ \\| |      | |   / /     \\ \\  | |____       | |  \n");
+    printf("\t\t\t\t|______|  |________|  |_|   \\___|      |_|  /_/       \\_\\ |______|      |_| \n");
 
-    printf("\t\t\t\t _____\t _____\t _    .\t_______\t   _  \t _____\t_______\t \n");
-    printf("\t\t\t\t|     \t|     |\t| \\   |\t   |  \t  / \\  \t|     \t   |  \t\n");
-    printf("\t\t\t\t|     \t|     |\t|  \\  |\t   |  \t /___\\ \t|     \t   |  \t \n");
-    printf("\t\t\t\t|_____\t|_____|\t|   \\_|    |   \t/     \\\t|_____\t   |   \t \n");
-    printf("\n\n\t\t\t\t\t\tPress Enter to continue...\n");
+    printf("\n\n\t\t\t\t\t\t\tPress Enter to continue...\n");
     getchar();
+    // getch();   // ummark for windows
 
     int choice;
     system("clear");
+    // system("clr");  //unmark on windows
     while (1)
     {
+        printf(blue_colour);
+        system("clear");
+        // system("clr");  //unmark on windows
+        printf("\t\t\t\t ______    ________    ___     _    _________    ___       ______    _________\n");
+        printf("\t\t\t\t|  ____|  |  ____  |  |   \\   | |  |___   ___|  / _ \\     |  ____|  |___   ___|\n");
+        printf("\t\t\t\t| |       | |    | |  | |\\ \\  | |      | |     / /_\\ \\    | |           | |  \n");
+        printf("\t\t\t\t| |       | |    | |  | | \\ \\ | |      | |    / ____  \\   | |           | | \n");
+        printf("\t\t\t\t| |____   | |____| |  | |  \\ \\| |      | |   / /     \\ \\  | |____       | |  \n");
+        printf("\t\t\t\t|______|  |________|  |_|   \\___|      |_|  /_/       \\_\\ |______|      |_| \n");
 
-        printf("\t\t\t\t _____\t _____\t _    .\t_______\t   _  \t _____\t_______\t \n");
-        printf("\t\t\t\t|     \t|     |\t| \\   |\t   |  \t  / \\  \t|     \t   |  \t\n");
-        printf("\t\t\t\t|     \t|     |\t|  \\  |\t   |  \t /___\\ \t|     \t   |  \t \n");
-        printf("\t\t\t\t|_____\t|_____|\t|   \\_|    |   \t/     \\\t|_____\t   |   \t \n");
+        printf(green_colour);
 
         // printf("\n\n\t\t\t\t\t============ CONTACTS ============\n");
-        printf("\n\t\t\t\t\t\t  1:add contacts");
-        printf("\n\t\t\t\t\t\t  2:show all contacts");
-        printf("\n\t\t\t\t\t\t  3:search contacts");
-        printf("\n\t\t\t\t\t\t  4:update contacts");
-        printf("\n\t\t\t\t\t\t  5:delete contacts");
-        printf("\n\t\t\t\t\t\t  6:Exit\n");
-        printf("\t\t\t  \t\t      __________________________\n");
-        printf("\t\t\t\t\t\t\n");
-        printf("\t\t\t\t\t\tEnter your choice: ");
+        printf("\n\t\t\t\t\t\t\t  1:add contacts");
+        printf("\n\t\t\t\t\t\t\t  2:show all contacts");
+        printf("\n\t\t\t\t\t\t\t  3:search contacts");
+        printf("\n\t\t\t\t\t\t\t  4:update contacts");
+        printf("\n\t\t\t\t\t\t\t  5:delete contacts");
+        printf(red_colour);
+        printf("\n\t\t\t\t\t\t\t  6:Exit\n");
+        printf(green_colour);
+        printf("\t\t\t  \t\t\t      __________________________\n");
+        printf("\t\t\t\t\t\t\t\n");
+        printf("\t\t\t\t\t\t\tEnter your choice: ");
         scanf("%d", &choice);
         printf("\n\n");
         switch (choice)
@@ -72,33 +89,36 @@ void main()
             update_contact();
             break;
         case 5:
+
             delete_contact();
             break;
         case 6:
+            printf(red_colour);
             printf("Exiting program. Goodbye!\n");
             exit(0);
         default:
             printf("Invalid choice. Please try again.\n");
         }
+        printf("\033[1;33m");
     }
 }
 
 void add_contact()
 {
-    // system("cls");
     system("clear");
+    // system("clr");  //unmark on windows
     char another;
     FILE *fp;
     int n, i;
     struct contacts info;
     do
     {
-        printf("\n\t\t\t\t\t===== Add Contacts ====\n\n\n");
-        printf("\t\t\t\t\tEnter first name  : ");
+        printf("\n\t\t\t\t\t\t===== Add Contacts ====\n\n\n");
+        printf("\t\t\t\t\t\tEnter first name  : ");
         scanf("%s", info.first_name);
-        printf("\t\t\t\t\tEnter second name : ");
+        printf("\t\t\t\t\t\tEnter second name : ");
         scanf("%s", info.last_name);
-        printf("\n\t\t\t\t\tEnter the phoneno : ");
+        printf("\n\t\t\t\t\t\tEnter the phoneno : ");
         scanf("%ld", &info.phoneno);
 
         fp = fopen("contacts.txt", "a");
@@ -111,12 +131,13 @@ void add_contact()
         fwrite(&info, sizeof(struct contacts), 1, fp);
         fclose(fp);
 
-        printf("\n\n\t\t\t\t\tContact stored successfully\n");
-        printf("\t\t\t\tDo you want to add another record ?(y/n) :");
+        printf("\n\n\t\t\t\t\t\tContact stored successfully\n");
+        printf("\t\t\t\t\tDo you want to add another record ?(y/n) :");
         scanf("%s", &another);
 
     } while (another == 'y' || another == 'Y');
     system("clear");
+    // system("clr");  //unmark on windows
 }
 
 int compare(const void *a, const void *b)
@@ -136,9 +157,10 @@ int compare(const void *a, const void *b)
 
 void display_contacts()
 {
-    // system("cls");
     system("clear");
+    // system("clr");  //unmark on windows
     getchar();
+    // getch();   // ummark for windows
 
     FILE *fp;
     struct contacts contactArray[100];
@@ -148,7 +170,7 @@ void display_contacts()
     fp = fopen("contacts.txt", "r");
     if (fp == NULL)
     {
-        fprintf(stderr, "\t\t\t Can't open files\n");
+        fprintf(stderr, "\t\t\t\t Can't open files\n");
         return;
     }
 
@@ -163,27 +185,29 @@ void display_contacts()
     printf("\n\n\t\t\t\t\t============ CONTACTS ============\n\n");
     for (int i = 0; i < c; i++)
     {
-        printf("\n\t\t\t\t\t\t %d) Name  : %s %s\n", i + 1, contactArray[i].first_name, contactArray[i].last_name);
-        printf("\t\t\t\t\t\t   Phone no : %ld\n", contactArray[i].phoneno);
-        printf("\t\t\t\t\t\t-------------------------\n");
+        printf("\n\t\t\t\t\t\t\t %d) Name  : %s %s\n", i + 1, contactArray[i].first_name, contactArray[i].last_name);
+        printf("\t\t\t\t\t\t\t   Phone no : %ld\n", contactArray[i].phoneno);
+        printf("\t\t\t\t\t\t\t-------------------------\n");
     }
-    printf("\n\t\t\t\t\t\tPress Enter to continue...\n");
-    // getch();
+    printf("\n\t\t\t\t\t\t\tPress Enter to continue...\n");
     getchar();
+    // getch();   // ummark for windows
     system("clear");
+    // system("clr");  //unmark on windows
 }
 
 void search_contact()
 {
-    // system("cls");
     system("clear");
+    // system("clr");  //unmark on windows
     getchar();
+    // getch();   // ummark for windows
     FILE *fp;
     struct contacts info;
     char name[30];
     int found = 0;
 
-    printf("\t\t\t\t\t\tEnter the name : ");
+    printf("\t\t\t\t\t\t\tEnter the name : ");
     scanf("%s", name);
     for (int i = 0; name[i]; i++)
     {
@@ -197,9 +221,10 @@ void search_contact()
         return;
     }
 
-    printf("\n\n\n\t\t\t\t\t\t===== Search Result =====\n\n\n");
+    printf("\n\n\n\t\t\t\t\t\t\t===== Search Result =====\n\n\n");
 
     getchar();
+    // getch();   // ummark for windows
 
     while (fread(&info, sizeof(struct contacts), 1, fp))
     {
@@ -212,21 +237,24 @@ void search_contact()
 
         if (strcmp(contactFirstName, name) == 0)
         {
-            printf("\t\t\t\t\t\tName: %s %s\n", info.first_name, info.last_name);
-            printf("\t\t\t\t\t\tPhone Number: %ld\n", info.phoneno);
-            printf("\t\t\t\t\t\t____________________________\n");
+            printf("\t\t\t\t\t\t\tName: %s %s\n", info.first_name, info.last_name);
+            printf("\t\t\t\t\t\t\tPhone Number: %ld\n", info.phoneno);
+            printf("\t\t\t\t\t\t\t____________________________\n");
             getchar();
+            // getch();   // ummark for windows
             found = 1;
         }
     }
     if (!found)
     {
-        printf("\n\t\t\t\t\t\tNo contacts founds by that name\n");
+        printf("\n\t\t\t\t\t\t\tNo contacts founds by that name\n");
         getchar();
+        // getch();   // ummark for windows
     }
     fclose(fp);
-    // getch();
+    // getch();   // ummark for windows
     system("clear");
+    // system("clr");  //unmark on windows
 }
 void update_contact()
 {
@@ -235,7 +263,7 @@ void update_contact()
     char name[30];
     int found = 0;
 
-    printf("\t\t\t\t\t\tEnter the name to update : ");
+    printf("\t\t\t\t\t\t\tEnter the name to update : ");
     scanf(" %s", name);
     for (int i = 0; name[i]; i++)
     {
@@ -261,21 +289,23 @@ void update_contact()
 
         if (strcmp(contactFirstName, name) == 0)
         {
-            printf("\n\t\t\t\t\t\tEnter new first name  : ");
+            printf("\n\t\t\t\t\t\t\tEnter new first name  : ");
             scanf("%s", info.first_name);
-            printf("\t\t\t\t\t\tEnter new second name  : ");
+            printf("\t\t\t\t\t\t\tEnter new second name  : ");
             scanf("%s", info.last_name);
-            printf("\t\t\t\t\t\tEnter new phoneno : ");
+            printf("\t\t\t\t\t\t\tEnter new phoneno : ");
             scanf("%ld", &info.phoneno);
             found = 1;
-            printf("\n\n\t\t\t\t\t\tcontact updated successfully");
+            printf("\n\n\t\t\t\t\t\t\tcontact updated successfully");
             getchar();
+            // getch();   // ummark for windows
         }
         fwrite(&info, sizeof(struct contacts), 1, fp1);
     }
     fclose(fp);
     fclose(fp1);
     getchar();
+    // getch();   // ummark for windows
     if (found)
     {
         fp1 = fopen("tempContacts.txt", "r");
@@ -290,12 +320,15 @@ void update_contact()
         fclose(fp1);
         remove("tempContacts.txt");
         system("clear");
+        // system("clr");  //unmark on windows
     }
     else
     {
-        printf("\n\t\t\t\t\t\tNo contacts founds by that name\n");
+        printf("\n\t\t\t\t\t\t\tNo contacts founds by that name\n");
         getchar();
+        // getch();   // ummark for windows
         system("clear");
+        // system("clr");  //unmark on windows
     }
 }
 
@@ -306,7 +339,7 @@ void delete_contact()
     char name[30];
     int found = 0;
 
-    printf("\t\t\t\t\t\tEnter the name to delete : ");
+    printf("\t\t\t\t\t\t\tEnter the name to delete : ");
     scanf("%s", name);
     for (int i = 0; name[i]; i++)
     {
@@ -333,8 +366,9 @@ void delete_contact()
         if (strcmp(contactFirstName, name) == 0)
         {
             found = 1;
-            printf("\n\t\t\t\t\t\tContact deleted successfully.\n");
+            printf("\n\t\t\t\t\t\t\tContact deleted successfully.\n");
             getchar();
+            // getch();   // ummark for windows
         }
         else
             fwrite(&info, sizeof(struct contacts), 1, fp1);
@@ -342,6 +376,7 @@ void delete_contact()
     fclose(fp);
     fclose(fp1);
     getchar();
+    // getch();   // ummark for windows
     if (found)
     {
         fp1 = fopen("tempContacts.txt", "r");
@@ -356,11 +391,14 @@ void delete_contact()
         fclose(fp1);
         remove("tempContacts.txt");
         system("clear");
+        // system("clr");  //unmark on windows
     }
     else
     {
         printf("\n\t\t\t\t\t\tNo contacts founds by that name\n");
         getchar();
+        // getch();   // ummark for windows
         system("clear");
+        // system("clr");  //unmark on windows
     }
 }
