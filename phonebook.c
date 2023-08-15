@@ -10,7 +10,7 @@ struct contacts
 {
     char first_name[30];
     char last_name[30];
-    long int phoneno;
+    char phoneno[10];
 };
 
 void add_contact();
@@ -25,10 +25,9 @@ int c = 0;
 void main()
 {
     getchar();
-    // getch();   // ummark for windows
 
-    system("clear");
-    // system("clr");  //unmark on windows
+    // system("clear");    // unmark on linux
+    system("cls"); // unmark on windows
     printf(blue_colour);
     printf("\t\t\t\t ______    ________    ___     _    _________    ___       ______    _________\n");
     printf("\t\t\t\t|  ____|  |  ____  |  |   \\   | |  |___   ___|  / _ \\     |  ____|  |___   ___|\n");
@@ -39,16 +38,17 @@ void main()
 
     printf("\n\n\t\t\t\t\t\t\tPress Enter to continue...\n");
     getchar();
-    // getch();   // ummark for windows
 
     int choice;
-    system("clear");
-    // system("clr");  //unmark on windows
+
+    // system("clear");    // unmark on linux
+    system("cls"); // unmark on windows
     while (1)
     {
         printf(blue_colour);
-        system("clear");
-        // system("clr");  //unmark on windows
+
+        // system("clear");    // unmark on linux
+        system("cls"); // unmark on windows
         printf("\t\t\t\t ______    ________    ___     _    _________    ___       ______    _________\n");
         printf("\t\t\t\t|  ____|  |  ____  |  |   \\   | |  |___   ___|  / _ \\     |  ____|  |___   ___|\n");
         printf("\t\t\t\t| |       | |    | |  | |\\ \\  | |      | |     / /_\\ \\    | |           | |  \n");
@@ -105,8 +105,9 @@ void main()
 
 void add_contact()
 {
-    system("clear");
-    // system("clr");  //unmark on windows
+
+    // system("clear");    // unmark on linux
+    system("cls"); // unmark on windows
     char another;
     FILE *fp;
     int n, i;
@@ -119,7 +120,7 @@ void add_contact()
         printf("\t\t\t\t\t\tEnter second name : ");
         scanf("%s", info.last_name);
         printf("\n\t\t\t\t\t\tEnter the phoneno : ");
-        scanf("%ld", &info.phoneno);
+        scanf("%s", info.phoneno);
 
         fp = fopen("contacts.txt", "a");
         if (fp == NULL)
@@ -136,8 +137,9 @@ void add_contact()
         scanf("%s", &another);
 
     } while (another == 'y' || another == 'Y');
-    system("clear");
-    // system("clr");  //unmark on windows
+
+    // system("clear");    // unmark on linux
+    system("cls"); // unmark on windows
 }
 
 int compare(const void *a, const void *b)
@@ -157,10 +159,10 @@ int compare(const void *a, const void *b)
 
 void display_contacts()
 {
-    system("clear");
-    // system("clr");  //unmark on windows
+
+    // system("clear");    // unmark on linux
+    system("cls"); // unmark on windows
     getchar();
-    // getch();   // ummark for windows
 
     FILE *fp;
     struct contacts contactArray[100];
@@ -186,22 +188,22 @@ void display_contacts()
     for (int i = 0; i < c; i++)
     {
         printf("\n\t\t\t\t\t\t\t %d) Name  : %s %s\n", i + 1, contactArray[i].first_name, contactArray[i].last_name);
-        printf("\t\t\t\t\t\t\t   Phone no : %ld\n", contactArray[i].phoneno);
+        printf("\t\t\t\t\t\t\t   Phone no : %s\n", contactArray[i].phoneno);
         printf("\t\t\t\t\t\t\t-------------------------\n");
     }
     printf("\n\t\t\t\t\t\t\tPress Enter to continue...\n");
     getchar();
-    // getch();   // ummark for windows
-    system("clear");
-    // system("clr");  //unmark on windows
+
+    // system("clear");    // unmark on linux
+    system("cls"); // unmark on windows
 }
 
 void search_contact()
 {
-    system("clear");
-    // system("clr");  //unmark on windows
+
+    // system("clear");    // unmark on linux
+    system("cls"); // unmark on windows
     getchar();
-    // getch();   // ummark for windows
     FILE *fp;
     struct contacts info;
     char name[30];
@@ -224,7 +226,6 @@ void search_contact()
     printf("\n\n\n\t\t\t\t\t\t\t===== Search Result =====\n\n\n");
 
     getchar();
-    // getch();   // ummark for windows
 
     while (fread(&info, sizeof(struct contacts), 1, fp))
     {
@@ -238,10 +239,10 @@ void search_contact()
         if (strcmp(contactFirstName, name) == 0)
         {
             printf("\t\t\t\t\t\t\tName: %s %s\n", info.first_name, info.last_name);
-            printf("\t\t\t\t\t\t\tPhone Number: %ld\n", info.phoneno);
+            printf("\t\t\t\t\t\t\tPhone Number: %s\n", info.phoneno);
             printf("\t\t\t\t\t\t\t____________________________\n");
             getchar();
-            // getch();   // ummark for windows
+
             found = 1;
         }
     }
@@ -249,12 +250,11 @@ void search_contact()
     {
         printf("\n\t\t\t\t\t\t\tNo contacts founds by that name\n");
         getchar();
-        // getch();   // ummark for windows
     }
     fclose(fp);
-    // getch();   // ummark for windows
-    system("clear");
-    // system("clr");  //unmark on windows
+
+    // system("clear");    // unmark on linux
+    system("cls"); // unmark on windows
 }
 void update_contact()
 {
@@ -294,18 +294,17 @@ void update_contact()
             printf("\t\t\t\t\t\t\tEnter new second name  : ");
             scanf("%s", info.last_name);
             printf("\t\t\t\t\t\t\tEnter new phoneno : ");
-            scanf("%ld", &info.phoneno);
+            scanf("%s", info.phoneno);
             found = 1;
             printf("\n\n\t\t\t\t\t\t\tcontact updated successfully");
             getchar();
-            // getch();   // ummark for windows
         }
         fwrite(&info, sizeof(struct contacts), 1, fp1);
     }
     fclose(fp);
     fclose(fp1);
     getchar();
-    // getch();   // ummark for windows
+
     if (found)
     {
         fp1 = fopen("tempContacts.txt", "r");
@@ -319,16 +318,17 @@ void update_contact()
         fclose(fp);
         fclose(fp1);
         remove("tempContacts.txt");
-        system("clear");
-        // system("clr");  //unmark on windows
+
+        // system("clear");    // unmark on linux
+        system("cls"); // unmark on windows
     }
     else
     {
         printf("\n\t\t\t\t\t\t\tNo contacts founds by that name\n");
         getchar();
-        // getch();   // ummark for windows
-        system("clear");
-        // system("clr");  //unmark on windows
+
+        // system("clear");    // unmark on linux
+        system("cls"); // unmark on windows
     }
 }
 
@@ -368,7 +368,6 @@ void delete_contact()
             found = 1;
             printf("\n\t\t\t\t\t\t\tContact deleted successfully.\n");
             getchar();
-            // getch();   // ummark for windows
         }
         else
             fwrite(&info, sizeof(struct contacts), 1, fp1);
@@ -376,7 +375,6 @@ void delete_contact()
     fclose(fp);
     fclose(fp1);
     getchar();
-    // getch();   // ummark for windows
     if (found)
     {
         fp1 = fopen("tempContacts.txt", "r");
@@ -390,15 +388,16 @@ void delete_contact()
         fclose(fp);
         fclose(fp1);
         remove("tempContacts.txt");
-        system("clear");
-        // system("clr");  //unmark on windows
+
+        // system("clear");    // unmark on linux
+        system("cls"); // unmark on windows
     }
     else
     {
         printf("\n\t\t\t\t\t\tNo contacts founds by that name\n");
         getchar();
-        // getch();   // ummark for windows
-        system("clear");
-        // system("clr");  //unmark on windows
+
+        // system("clear");    // unmark on linux
+        system("cls"); // unmark on windows
     }
 }
