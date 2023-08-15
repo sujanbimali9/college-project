@@ -13,6 +13,7 @@ struct contacts
     char phoneno[10];
 };
 
+void clrscr();
 void add_contact();
 void display_contacts();
 void search_contact();
@@ -25,9 +26,7 @@ int c = 0;
 void main()
 {
     getchar();
-
-    // system("clear");    // unmark on linux
-    system("cls"); // unmark on windows
+    clrscr();
     printf(blue_colour);
     printf("\t\t\t\t ______    ________    ___     _    _________    ___       ______    _________\n");
     printf("\t\t\t\t|  ____|  |  ____  |  |   \\   | |  |___   ___|  / _ \\     |  ____|  |___   ___|\n");
@@ -40,15 +39,12 @@ void main()
     getchar();
 
     int choice;
-
-    // system("clear");    // unmark on linux
-    system("cls"); // unmark on windows
+    clrscr();
     while (1)
     {
         printf(blue_colour);
 
-        // system("clear");    // unmark on linux
-        system("cls"); // unmark on windows
+        clrscr();
         printf("\t\t\t\t ______    ________    ___     _    _________    ___       ______    _________\n");
         printf("\t\t\t\t|  ____|  |  ____  |  |   \\   | |  |___   ___|  / _ \\     |  ____|  |___   ___|\n");
         printf("\t\t\t\t| |       | |    | |  | |\\ \\  | |      | |     / /_\\ \\    | |           | |  \n");
@@ -103,11 +99,21 @@ void main()
     }
 }
 
-void add_contact()
+void clrscr()
 {
 
-    // system("clear");    // unmark on linux
-    system("cls"); // unmark on windows
+    // checking the platform
+
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
+void add_contact()
+{
+    clrscr();
     char another;
     FILE *fp;
     int n, i;
@@ -137,9 +143,7 @@ void add_contact()
         scanf("%s", &another);
 
     } while (another == 'y' || another == 'Y');
-
-    // system("clear");    // unmark on linux
-    system("cls"); // unmark on windows
+    clrscr();
 }
 
 int compare(const void *a, const void *b)
@@ -159,9 +163,7 @@ int compare(const void *a, const void *b)
 
 void display_contacts()
 {
-
-    // system("clear");    // unmark on linux
-    system("cls"); // unmark on windows
+    clrscr();
     getchar();
 
     FILE *fp;
@@ -184,7 +186,7 @@ void display_contacts()
     fclose(fp);
     qsort(contactArray, c, sizeof(struct contacts), compare);
 
-    printf("\n\n\t\t\t\t\t============ CONTACTS ============\n\n");
+    printf("\n\n\t\t\t\t\t\t     ============ CONTACTS ============\n\n");
     for (int i = 0; i < c; i++)
     {
         printf("\n\t\t\t\t\t\t\t %d) Name  : %s %s\n", i + 1, contactArray[i].first_name, contactArray[i].last_name);
@@ -193,16 +195,12 @@ void display_contacts()
     }
     printf("\n\t\t\t\t\t\t\tPress Enter to continue...\n");
     getchar();
-
-    // system("clear");    // unmark on linux
-    system("cls"); // unmark on windows
+    clrscr();
 }
 
 void search_contact()
 {
-
-    // system("clear");    // unmark on linux
-    system("cls"); // unmark on windows
+    clrscr();
     getchar();
     FILE *fp;
     struct contacts info;
@@ -252,9 +250,7 @@ void search_contact()
         getchar();
     }
     fclose(fp);
-
-    // system("clear");    // unmark on linux
-    system("cls"); // unmark on windows
+    clrscr();
 }
 void update_contact()
 {
@@ -318,17 +314,13 @@ void update_contact()
         fclose(fp);
         fclose(fp1);
         remove("tempContacts.txt");
-
-        // system("clear");    // unmark on linux
-        system("cls"); // unmark on windows
+        clrscr();
     }
     else
     {
         printf("\n\t\t\t\t\t\t\tNo contacts founds by that name\n");
         getchar();
-
-        // system("clear");    // unmark on linux
-        system("cls"); // unmark on windows
+        clrscr();
     }
 }
 
@@ -388,16 +380,12 @@ void delete_contact()
         fclose(fp);
         fclose(fp1);
         remove("tempContacts.txt");
-
-        // system("clear");    // unmark on linux
-        system("cls"); // unmark on windows
+        clrscr();
     }
     else
     {
         printf("\n\t\t\t\t\t\tNo contacts founds by that name\n");
         getchar();
-
-        // system("clear");    // unmark on linux
-        system("cls"); // unmark on windows
+        clrscr();
     }
 }
