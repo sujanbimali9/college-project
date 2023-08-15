@@ -85,7 +85,6 @@ void main()
             update_contact();
             break;
         case 5:
-
             delete_contact();
             break;
         case 6:
