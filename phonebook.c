@@ -3,14 +3,17 @@
 #include <stdlib.h>
 #include <ctype.h>
 #define green_colour "\033[1;32m"
-#define blue_colour "\033[0;34m"
+#define blue_colour "\033[0;35m"
 #define red_colour "\033[0;31m"
+#define MAX_CONTACTS 100
+#define MAX_NAME_LENGTH 30
+#define MAX_PHONE_LENGTH 10
 
 struct contacts
 {
-    char first_name[30];
-    char last_name[30];
-    char phoneno[10];
+    char first_name[MAX_NAME_LENGTH];
+    char last_name[MAX_NAME_LENGTH];
+    long int phoneno;
 };
 
 void clrscr();
@@ -85,6 +88,7 @@ void main()
             update_contact();
             break;
         case 5:
+
             delete_contact();
             break;
         case 6:
@@ -125,7 +129,7 @@ void add_contact()
         printf("\t\t\t\t\t\tEnter second name : ");
         scanf("%s", info.last_name);
         printf("\n\t\t\t\t\t\tEnter the phoneno : ");
-        scanf("%s", info.phoneno);
+        scanf("%ld", &info.phoneno);
 
         fp = fopen("contacts.txt", "a");
         if (fp == NULL)
@@ -166,7 +170,7 @@ void display_contacts()
     getchar();
 
     FILE *fp;
-    struct contacts contactArray[100];
+    struct contacts contactArray[MAX_CONTACTS];
     struct contacts info;
     int c = 0;
 
@@ -189,7 +193,8 @@ void display_contacts()
     for (int i = 0; i < c; i++)
     {
         printf("\n\t\t\t\t\t\t\t %d) Name  : %s %s\n", i + 1, contactArray[i].first_name, contactArray[i].last_name);
-        printf("\t\t\t\t\t\t\t   Phone no : %s\n", contactArray[i].phoneno);
+        fflush(stdin);
+        printf("\t\t\t\t\t\t\t   Phone no : %ld\n", contactArray[i].phoneno);
         printf("\t\t\t\t\t\t\t-------------------------\n");
     }
     printf("\n\t\t\t\t\t\t\tPress Enter to continue...\n");
@@ -203,7 +208,7 @@ void search_contact()
     getchar();
     FILE *fp;
     struct contacts info;
-    char name[30];
+    char name[MAX_NAME_LENGTH], lastname[MAX_NAME_LENGTH];
     int found = 0;
 
     printf("\t\t\t\t\t\t\tEnter the name : ");
@@ -211,6 +216,13 @@ void search_contact()
     for (int i = 0; name[i]; i++)
     {
         name[i] = tolower(name[i]);
+    }
+    printf("\t\t\t\t\t\t\tEnter the lastname : ");
+    scanf("%s", lastname);
+
+    for (int i = 0; lastname[i]; i++)
+    {
+        lastname[i] = tolower(lastname[i]);
     }
 
     fp = fopen("contacts.txt", "r");
@@ -226,17 +238,23 @@ void search_contact()
 
     while (fread(&info, sizeof(struct contacts), 1, fp))
     {
-        char contactFirstName[30];
+        char contactFirstName[MAX_NAME_LENGTH], contactLastName[MAX_NAME_LENGTH];
         strcpy(contactFirstName, info.first_name);
+        strcpy(contactLastName, info.last_name);
         for (int i = 0; contactFirstName[i]; i++)
         {
             contactFirstName[i] = tolower(contactFirstName[i]);
         }
 
-        if (strcmp(contactFirstName, name) == 0)
+        for (int i = 0; contactLastName[i]; i++)
+        {
+            contactLastName[i] = tolower(contactLastName[i]);
+        }
+
+        if (strcmp(contactFirstName, name) == 0 && strcmp(contactLastName, lastname) == 0)
         {
             printf("\t\t\t\t\t\t\tName: %s %s\n", info.first_name, info.last_name);
-            printf("\t\t\t\t\t\t\tPhone Number: %s\n", info.phoneno);
+            printf("\t\t\t\t\t\t\tPhone Number: %ld\n", info.phoneno);
             printf("\t\t\t\t\t\t\t____________________________\n");
             getchar();
 
@@ -255,7 +273,7 @@ void update_contact()
 {
     FILE *fp, *fp1;
     struct contacts info;
-    char name[30];
+    char name[MAX_NAME_LENGTH], lastname[MAX_NAME_LENGTH];
     int found = 0;
 
     printf("\t\t\t\t\t\t\tEnter the name to update : ");
@@ -263,6 +281,13 @@ void update_contact()
     for (int i = 0; name[i]; i++)
     {
         name[i] = tolower(name[i]);
+    }
+    printf("\t\t\t\t\t\t\tEnter the lastname : ");
+    scanf("%s", lastname);
+
+    for (int i = 0; lastname[i]; i++)
+    {
+        lastname[i] = tolower(lastname[i]);
     }
 
     fp = fopen("contacts.txt", "r");
@@ -275,21 +300,26 @@ void update_contact()
 
     while (fread(&info, sizeof(struct contacts), 1, fp))
     {
-        char contactFirstName[30];
+        char contactFirstName[MAX_NAME_LENGTH], contactLastName[MAX_NAME_LENGTH];
         strcpy(contactFirstName, info.first_name);
+        strcpy(contactLastName, info.last_name);
         for (int i = 0; contactFirstName[i]; i++)
         {
             contactFirstName[i] = tolower(contactFirstName[i]);
         }
+        for (int i = 0; contactLastName[i]; i++)
+        {
+            contactLastName[i] = tolower(contactLastName[i]);
+        }
 
-        if (strcmp(contactFirstName, name) == 0)
+        if (strcmp(contactFirstName, name) == 0 && strcmp(contactLastName, lastname) == 0)
         {
             printf("\n\t\t\t\t\t\t\tEnter new first name  : ");
             scanf("%s", info.first_name);
             printf("\t\t\t\t\t\t\tEnter new second name  : ");
             scanf("%s", info.last_name);
             printf("\t\t\t\t\t\t\tEnter new phoneno : ");
-            scanf("%s", info.phoneno);
+            scanf("%ld", &info.phoneno);
             found = 1;
             printf("\n\n\t\t\t\t\t\t\tcontact updated successfully");
             getchar();
@@ -327,7 +357,7 @@ void delete_contact()
 {
     FILE *fp, *fp1;
     struct contacts info;
-    char name[30];
+    char name[MAX_NAME_LENGTH], lastname[MAX_NAME_LENGTH];
     int found = 0;
 
     printf("\t\t\t\t\t\t\tEnter the name to delete : ");
@@ -335,6 +365,14 @@ void delete_contact()
     for (int i = 0; name[i]; i++)
     {
         name[i] = tolower(name[i]);
+    }
+
+    printf("\t\t\t\t\t\t\tEnter the lastname : ");
+    scanf("%s", lastname);
+
+    for (int i = 0; lastname[i]; i++)
+    {
+        lastname[i] = tolower(lastname[i]);
     }
 
     fp = fopen("contacts.txt", "r");
@@ -347,14 +385,19 @@ void delete_contact()
 
     while (fread(&info, sizeof(struct contacts), 1, fp))
     {
-        char contactFirstName[30];
+        char contactFirstName[MAX_NAME_LENGTH], contactLastName[MAX_NAME_LENGTH];
         strcpy(contactFirstName, info.first_name);
+        strcpy(contactLastName, info.last_name);
         for (int i = 0; contactFirstName[i]; i++)
         {
             contactFirstName[i] = tolower(contactFirstName[i]);
         }
+        for (int i = 0; contactLastName[i]; i++)
+        {
+            contactLastName[i] = tolower(contactLastName[i]);
+        }
 
-        if (strcmp(contactFirstName, name) == 0)
+        if (strcmp(contactFirstName, name) == 0 && strcmp(contactLastName, lastname) == 0)
         {
             found = 1;
             printf("\n\t\t\t\t\t\t\tContact deleted successfully.\n");
