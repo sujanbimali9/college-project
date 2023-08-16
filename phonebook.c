@@ -14,7 +14,7 @@ struct contacts
 {
     char first_name[MAX_NAME_LENGTH];
     char last_name[MAX_NAME_LENGTH];
-    char phoneno[20];
+    char phoneno[MAX_PHONE_LENGTH];
 };
 
 void clrscr();
@@ -42,7 +42,7 @@ void main()
     printf("\n\n\t\t\t\t\t\t\tPress Enter to continue...\n");
     getch();
 
-    int choice;
+    char choice;
     clrscr();
     while (1)
     {
@@ -70,28 +70,28 @@ void main()
         printf("\t\t\t  \t\t\t      __________________________\n");
         printf("\t\t\t\t\t\t\t\n");
         printf("\t\t\t\t\t\t\tEnter your choice: ");
-        scanf("%d", &choice);
+        scanf("%c", &choice);
         printf("\n\n");
         switch (choice)
         {
-        case 1:
+        case '1':
 
             add_contact();
             c++;
             break;
-        case 2:
+        case '2':
             display_contacts();
             break;
-        case 3:
+        case '3':
             search_contact();
             break;
-        case 4:
+        case '4':
             update_contact();
             break;
-        case 5:
+        case '5':
             delete_contact();
             break;
-        case 6:
+        case '6':
             printf(red_colour);
             printf("Exiting program. Goodbye!\n");
             exit(0);
@@ -329,7 +329,7 @@ void update_contact()
     }
     fclose(fp);
     fclose(fp1);
-    getch();
+    // getch();
 
     if (found)
     {
@@ -427,7 +427,7 @@ void delete_contact()
     }
     else
     {
-        printf("\n\t\t\t\t\t\tNo contacts founds by that name\n");
+        printf("\n\t\t\t\t\t\t\tNo contacts founds by that name\n");
         getch();
         clrscr();
     }
