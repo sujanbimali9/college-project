@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <conio.h>
 #define green_colour "\033[1;32m"
 #define blue_colour "\033[0;35m"
 #define red_colour "\033[0;31m"
@@ -28,7 +29,7 @@ int c = 0;
 
 void main()
 {
-    getchar();
+    // getch();
     clrscr();
     printf(blue_colour);
     printf("\t\t\t\t ______    ________    ___     _    _________    ___       ______    _________\n");
@@ -39,7 +40,7 @@ void main()
     printf("\t\t\t\t|______|  |________|  |_|   \\___|      |_|  /_/       \\_\\ |______|      |_| \n");
 
     printf("\n\n\t\t\t\t\t\t\tPress Enter to continue...\n");
-    getchar();
+    getch();
 
     int choice;
     clrscr();
@@ -166,7 +167,7 @@ int compare(const void *a, const void *b)
 void display_contacts()
 {
     clrscr();
-    getchar();
+    // getch();
 
     FILE *fp;
     struct contacts contactArray[MAX_CONTACTS];
@@ -197,14 +198,14 @@ void display_contacts()
         printf("\t\t\t\t\t\t\t-------------------------\n");
     }
     printf("\n\t\t\t\t\t\t\tPress Enter to continue...\n");
-    getchar();
+    getch();
     clrscr();
 }
 
 void search_contact()
 {
     clrscr();
-    getchar();
+    // getch();
     FILE *fp;
     struct contacts info;
     char name[MAX_NAME_LENGTH], lastname[MAX_NAME_LENGTH];
@@ -233,7 +234,7 @@ void search_contact()
 
     printf("\n\n\n\t\t\t\t\t\t\t===== Search Result =====\n\n\n");
 
-    getchar();
+    // getch();
 
     while (fread(&info, sizeof(struct contacts), 1, fp))
     {
@@ -255,7 +256,7 @@ void search_contact()
             printf("\t\t\t\t\t\t\tName: %s %s\n", info.first_name, info.last_name);
             printf("\t\t\t\t\t\t\tPhone Number: %s\n", info.phoneno);
             printf("\t\t\t\t\t\t\t____________________________\n");
-            getchar();
+            getch();
 
             found = 1;
         }
@@ -263,7 +264,7 @@ void search_contact()
     if (!found)
     {
         printf("\n\t\t\t\t\t\t\tNo contacts founds by that name\n");
-        getchar();
+        getch();
     }
     fclose(fp);
     clrscr();
@@ -322,13 +323,13 @@ void update_contact()
             scanf("%s", info.phoneno);
             found = 1;
             printf("\n\n\t\t\t\t\t\t\tcontact updated successfully");
-            getchar();
+            getch();
         }
         fwrite(&info, sizeof(struct contacts), 1, fp1);
     }
     fclose(fp);
     fclose(fp1);
-    getchar();
+    getch();
 
     if (found)
     {
@@ -348,7 +349,7 @@ void update_contact()
     else
     {
         printf("\n\t\t\t\t\t\t\tNo contacts founds by that name\n");
-        getchar();
+        getch();
         clrscr();
     }
 }
@@ -401,14 +402,14 @@ void delete_contact()
         {
             found = 1;
             printf("\n\t\t\t\t\t\t\tContact deleted successfully.\n");
-            getchar();
+            getch();
         }
         else
             fwrite(&info, sizeof(struct contacts), 1, fp1);
     }
     fclose(fp);
     fclose(fp1);
-    getchar();
+    getch();
     if (found)
     {
         fp1 = fopen("tempContacts.txt", "r");
@@ -427,7 +428,7 @@ void delete_contact()
     else
     {
         printf("\n\t\t\t\t\t\tNo contacts founds by that name\n");
-        getchar();
+        getch();
         clrscr();
     }
 }
