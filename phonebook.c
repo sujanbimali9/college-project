@@ -41,7 +41,7 @@ void main()
     printf("\n\n\t\t\t\t\t\t\tPress Enter to continue...\n");
     getchar();
 
-    int choice;
+    char choice;
     clrscr();
     while (1)
     {
@@ -69,7 +69,7 @@ void main()
         printf("\t\t\t  \t\t\t      __________________________\n");
         printf("\t\t\t\t\t\t\t\n");
         printf("\t\t\t\t\t\t\tEnter your choice: ");
-        scanf("%d", &choice);
+        scanf("%c", &choice);
         printf("\n\n");
         switch (choice)
         {
@@ -88,7 +88,6 @@ void main()
             update_contact();
             break;
         case 5:
-
             delete_contact();
             break;
         case 6:
@@ -269,6 +268,7 @@ void search_contact()
     fclose(fp);
     clrscr();
 }
+
 void update_contact()
 {
     FILE *fp, *fp1;
