@@ -13,7 +13,7 @@ struct contacts
 {
     char first_name[MAX_NAME_LENGTH];
     char last_name[MAX_NAME_LENGTH];
-    long int phoneno;
+    char phoneno[20];
 };
 
 void clrscr();
@@ -41,7 +41,7 @@ void main()
     printf("\n\n\t\t\t\t\t\t\tPress Enter to continue...\n");
     getchar();
 
-    char choice;
+    int choice;
     clrscr();
     while (1)
     {
@@ -69,7 +69,7 @@ void main()
         printf("\t\t\t  \t\t\t      __________________________\n");
         printf("\t\t\t\t\t\t\t\n");
         printf("\t\t\t\t\t\t\tEnter your choice: ");
-        scanf("%c", &choice);
+        scanf("%d", &choice);
         printf("\n\n");
         switch (choice)
         {
@@ -128,7 +128,7 @@ void add_contact()
         printf("\t\t\t\t\t\tEnter second name : ");
         scanf("%s", info.last_name);
         printf("\n\t\t\t\t\t\tEnter the phoneno : ");
-        scanf("%ld", &info.phoneno);
+        scanf("%s", info.phoneno);
 
         fp = fopen("contacts.txt", "a");
         if (fp == NULL)
@@ -193,7 +193,7 @@ void display_contacts()
     {
         printf("\n\t\t\t\t\t\t\t %d) Name  : %s %s\n", i + 1, contactArray[i].first_name, contactArray[i].last_name);
         fflush(stdin);
-        printf("\t\t\t\t\t\t\t   Phone no : %ld\n", contactArray[i].phoneno);
+        printf("\t\t\t\t\t\t\t   Phone no : %s\n", contactArray[i].phoneno);
         printf("\t\t\t\t\t\t\t-------------------------\n");
     }
     printf("\n\t\t\t\t\t\t\tPress Enter to continue...\n");
@@ -253,7 +253,7 @@ void search_contact()
         if (strcmp(contactFirstName, name) == 0 && strcmp(contactLastName, lastname) == 0)
         {
             printf("\t\t\t\t\t\t\tName: %s %s\n", info.first_name, info.last_name);
-            printf("\t\t\t\t\t\t\tPhone Number: %ld\n", info.phoneno);
+            printf("\t\t\t\t\t\t\tPhone Number: %s\n", info.phoneno);
             printf("\t\t\t\t\t\t\t____________________________\n");
             getchar();
 
@@ -319,7 +319,7 @@ void update_contact()
             printf("\t\t\t\t\t\t\tEnter new second name  : ");
             scanf("%s", info.last_name);
             printf("\t\t\t\t\t\t\tEnter new phoneno : ");
-            scanf("%ld", &info.phoneno);
+            scanf("%s", info.phoneno);
             found = 1;
             printf("\n\n\t\t\t\t\t\t\tcontact updated successfully");
             getchar();
